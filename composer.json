@@ -1,0 +1,12 @@
+{
+    "name": "koga1020/laravel-vue-api-generator",
+    "description": "artisan commands to generate laravel and vue files.",
+    "authors": [
+        {
+            "name": "koga1020",
+            "email": "koga.shozo1020@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
