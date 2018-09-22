@@ -37,7 +37,7 @@ class GenerateCommand extends Command
      */
     public function handle()
     {
-        $vuePageFolder = base_path('resources/assets/js/views/' . $this->argument('table_name'));
+        $vuePageFolder = base_path('resources/js/views/' . $this->argument('table_name'));
         if (! is_dir($vuePageFolder)) {
             mkdir($vuePageFolder, 0755, true);
         }
@@ -45,7 +45,6 @@ class GenerateCommand extends Command
         $this->indexVue($this->argument('table_name'), $vuePageFolder);
         $this->addVue($this->argument('table_name'), $vuePageFolder);
         $this->showVue($this->argument('table_name'), $vuePageFolder);
-
     }
 
     private function indexVue($tableName, $folder) 
