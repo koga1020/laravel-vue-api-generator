@@ -7,6 +7,18 @@
             "email": "koga.shozo1020@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Koga1020\\LaravelVueApiGenerator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Koga1020\\LaravelVueApiGenerator\\LaravelVueApiGeneratorServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
