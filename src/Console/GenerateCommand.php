@@ -11,7 +11,7 @@ class GenerateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:spa {table_name}';
+    protected $signature = 'make:spa {table_name} {--prefix=}';
 
     /**
      * The console command description.
@@ -37,7 +37,14 @@ class GenerateCommand extends Command
      */
     public function handle()
     {
-        $vuePageFolder = base_path('resources/js/views/' . $this->argument('table_name'));
+        $prefix = $this->option('prefix');
+
+        if ($prefix) {
+            $vuePageFolder = base_path('resources/js/views/' . $prefix . '/' . $this->argument('table_name'));
+        } else {
+            $vuePageFolder = base_path('resources/js/views/' . $this->argument('table_name'));
+        }
+
         if (! is_dir($vuePageFolder)) {
             mkdir($vuePageFolder, 0755, true);
         }
@@ -45,6 +52,7 @@ class GenerateCommand extends Command
         $this->indexVue($this->argument('table_name'), $vuePageFolder);
         $this->addVue($this->argument('table_name'), $vuePageFolder);
         $this->showVue($this->argument('table_name'), $vuePageFolder);
+        $this->editVue($this->argument('table_name'), $vuePageFolder);
     }
 
     private function indexVue($tableName, $folder) 
@@ -78,6 +86,17 @@ class GenerateCommand extends Command
         );
     
         file_put_contents($folder . '/Show.vue', $template);
+    }
+
+    private function editVue($tableName, $folder) 
+    {
+        $template = str_replace(
+            ['{{tableName}}'],
+            [studly_case($tableName)],
+            $this->getVueStub('Edit')
+        );
+    
+        file_put_contents($folder . '/Edit.vue', $template);
     }
 
 
